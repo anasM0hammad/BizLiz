@@ -6,18 +6,38 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
-
                 <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+                    <h3 class="text-center">Your Lists</h3>
 
-                    You are logged in!
+                    @if(count($listings))
+                     <table class="table table-striped">
+                      <thead>  
+                       <tr>
+                         <th>Comapny</th> 
+                         <th></th>
+                         <th></th> 
+                       </tr> 
+                      </thead> 
+                      @foreach($listings as $list)
+                      <tbody>
+                       <tr>
+                          <td>{{$list->name}}</th>
+                          <td></td>
+                          <td></td> 
+                       </tr>
+                      </tbody> 
+                      @endforeach 
+                     </table>
+                    @endif 
+
+
+                    
                 </div>
+               </div>
             </div>
         </div>
     </div>
 </div>
 @endsection
+
+
