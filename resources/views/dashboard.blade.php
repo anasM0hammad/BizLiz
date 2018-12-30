@@ -23,7 +23,12 @@
                        <tr>
                           <td>{{$list->name}}</th>
                           <td><a href="listings/{{$list->id}}/edit" class="btn btn-primary btn-sm float-right">Edit</a></td>
-                          <td></td> 
+                          <td>
+                              {!!Form::open(['action' => ['ListingController@destroy' , $list->id] , 'method' => 'POST' ])!!}
+                              {{Form::hidden('_method', 'DELETE')}}
+                              {{Form::bsSubmit('Delete' , ['class' => 'btn btn-sm btn-danger float-right'])}}
+                              {!!Form::close()!!}
+                          </td> 
                        </tr>
                       </tbody> 
                       @endforeach 
