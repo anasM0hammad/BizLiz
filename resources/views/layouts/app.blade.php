@@ -73,6 +73,11 @@
         </nav>
 
         <main class="py-4">
+          <div class="container">
+            <div class="card-body">
+             @include('inc.messages')
+            </div>
+          </div>  
             @yield('content')
         </main>
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Listing ;
 
 class listingController extends Controller
 {
@@ -34,7 +35,27 @@ class listingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request , [
+
+          'name' => 'required' ,
+          'email' => 'email' 
+        ]);
+
+
+        //CREATING LISTING 
+        $listing = new Listing ;
+        $listing->name = $request->input('name');
+        $listing->email = $request->input('email');
+        $listing->phone = $request->input('phone');
+        $listing->address = $request->input('address');
+        $listing->website = $request->input('website');
+        $listing->bio = $request->input('bio');
+
+        $listing->user_id = auth()->user()->id ;
+
+        $listing->save();
+
+        return redirect('dashboard')->with('success' , 'Business Listed Successfully');
     }
 
     /**
@@ -55,8 +76,9 @@ class listingController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        $listing = Listing::find($id);
+        return view('editlisting')->with('listing' , $listing);
     }
 
     /**
@@ -68,7 +90,27 @@ class listingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $this->validate($request , [
+
+          'name' => 'required' ,
+          'email' => 'email' 
+        ]);
+
+
+        //CREATING LISTING 
+        $listing = Listing::find($id);
+        $listing->name = $request->input('name');
+        $listing->email = $request->input('email');
+        $listing->phone = $request->input('phone');
+        $listing->address = $request->input('address');
+        $listing->website = $request->input('website');
+        $listing->bio = $request->input('bio');
+
+        $listing->user_id = auth()->user()->id ;
+
+        $listing->save();
+
+        return redirect('dashboard')->with('success' , 'Business Updated Successfully');
     }
 
     /**
